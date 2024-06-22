@@ -1,0 +1,229 @@
+@charset "UTF-8";
+*{box-sizing: border-box;
+	/* margin: 0px; */
+	padding: 0px;}
+a{
+color: black;
+text-decoration: none;
+}
+	
+.mag_detail_wrap{
+	padding-top: 95px;
+	margin: auto;
+	width: 1000px;
+}
+
+.DelRpBtn button{
+	background: #c8c8c8;
+	border : 1px solid #c8c8c8;
+	border-radius: 4px;
+	color: white;
+}
+
+/*매거진내용 */
+.mag_date{
+	font-size: 10px;
+    font-weight: 100;
+    color: #646464;
+    padding-bottom: 8px;
+    padding-top: 10px;
+}
+.mag_title{
+	font-size: 27px;
+    font-weight: 900;
+    color: black;
+    padding-bottom: 8px;
+    white-space: pre-wrap;
+    line-height: 40px;
+}
+.all_tags{
+	 font-size: 15px;
+    color: #646464;
+}
+.data_title{
+	color: #afafaf;
+    margin-right: 5px;
+}
+.data_cnt{
+	margin-right: 15px;
+    font-weight: 400;
+}
+.datas{
+	margin-top: 15px;
+    font-size: 15px;
+}
+.mag_content{
+    padding: 40px 0;
+}
+.related_title{
+	font-size: 20px;
+    box-sizing: border-box;
+    font-weight: bold;
+    padding-bottom: 12px;
+}
+
+/*댓글영역 */
+.mag_comm{
+	margin-top: 100px;
+    background-color: #fafafa;
+    font-size: 0;
+    box-sizing: border-box;
+    padding: 150px 0 40px 0;
+    position: relative;
+}
+.mag_owner{
+	position: absolute;
+    top: -40px;
+    left: 0;
+    width: 100%;
+}
+.mag_owner_profile{
+	text-align: center;
+	
+}
+.mag_owner_profile img{
+	width: 80px;
+    height: 80px;
+    border-radius: 40px;
+}
+.mag_owner_nickname{
+	text-align: center;
+    font-size: 16px;
+    padding-top: 10px;
+    color: #595959;
+}
+.mag_comm_container{
+	font-size: 16px;
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    padding-left: 250px;
+    padding-right: 250px;
+}
+.mag_comm_input_ne{
+	border: 1px solid #e5e5e5;
+    background-color: #fdfdfd;
+    font-size: 14px;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    width: 100%;
+    height: 28px;
+    color: #969696;
+    cursor: pointer;
+}
+
+.mag_comm_input input{
+	border: 1px solid #e5e5e5;
+    background-color: #fdfdfd;
+    font-size: 14px;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    width: 100%;
+    height: 28px;
+    color: #969696;
+}
+.mag_comm_submit{
+	box-sizing: border-box;
+    color: #fff;
+    font-size: 14px;
+    background-color: #917751;
+    border: 0;
+    border-radius: 4px;
+    width: 100%;
+    height: 28px;
+    line-height: 18px;
+    text-align: center;
+    line-height: 28px;
+    cursor: pointer;
+    opacity: .6;
+}
+/*태그위치 */
+.tag_img{
+	width : 25px;
+}
+.tag_div{
+position: relative;
+}
+.draggable{
+position: absolute;
+}
+.hover{
+	padding : 5px;
+	background : black;
+	opacity : 0.8;
+	display: none;
+	color : white;
+	font-size : 8px;
+}
+.draggable:hover .title_hover{
+	display: block;
+} 
+
+
+/*댓글목록 영역 */
+.mag_comm_item:first-child {
+	padding-top: 35px;
+}
+.mag_comm_item{
+	padding-bottom: 22px;
+}
+.mag_comm_item table{
+	    width: 100%;
+}
+.mag_comm_item table td:first-child {
+	    width: 45px;
+}
+.mag_comm_item table td{
+	    vertical-align: top;
+}
+.comm_member_profile img{
+	height: 35px;
+    width: 35px;
+    border-radius: 50%;
+}
+.comm_member_nickname{
+	    padding-top: 4px;
+    font-weight: 900;
+    font-size: 12px;
+}
+.comm_member_nickname a{
+	color: #000;
+    text-decoration: none;
+}
+.comm_date{
+	color: #afafaf;
+    font-size: 11px;
+    margin-left: 10px;
+    font-weight: 100;
+}
+.comm_content{
+	padding-top: 4px;
+    font-size: 12px;
+    line-height: 20px;
+}
+.mag_comm_item table td:last-child{
+	width: 45px;
+    text-align: right;
+}
+
+.comm_report{
+	padding-top: 4px;
+    line-height: 20px;
+    cursor: pointer;
+    display: none;
+}
+.mag_comm_item table td:last-child:hover .comm_report{
+	display: inline-block;
+}
+.comm_report img{
+	width: 20px;
+}
+
+
+
+
+
+
+
+

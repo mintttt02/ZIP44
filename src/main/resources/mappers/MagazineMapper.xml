@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+
+<mapper namespace="com.company.mapper.MagazineMapper">
+
+	
+	<insert id="createMag" parameterType="hashmap">
+		insert into Magazine values(
+		#{user_email},null,now(),#{mag_house},#{mag_size},#{mag_style},
+		default,default,#{mag_title},#{mag_content},#{mag_photo}, #{mag_tag})
+	</insert>
+	
+		<!-- 
+		매거진 리스트 
+		$은 따옴표 없음 #은 따옴표있음  -->
+	<select id="listOpMag" resultType="hashmap">
+	<![CDATA[ 
+		select mm.mag_num, mm.mag_photo, mm.mag_title, mm.mag_tag,
+      	c1.text as mag_house, c2.text as mag_size, c3.text as mag_style 
+      	from 
+      	magazine as mm 
+      	left join category as c1 on mm.mag_house = c1.code
+      	left join category as c2 on mm.mag_size = c2.code
+      	left join category as c3 on mm.mag_style = c3.code
+		where 
+		((#{mag_num} is null)
+        or
+        (mag_num <= #{mag_num}-1)) and
+		case when #{lable_house} != 99 then mag_house = #{lable_house}
+		 	else true end
+		and  case when #{lable_size} != 99 then mag_size = #{lable_size}
+		 	else true end
+		and case when #{lable_style} != 99 then mag_style = #{lable_style}
+		 	else true end
+		order by ${lableOrderby} desc
+		limit 0, 10
+	]]>	
+	</select>
+	
+	<!-- mybatis-config.xml에 parameterType 이나 resultType의 기본값이 지정되어있음 -->
+	<select id="readMag" resultType="hashmap">
+		select u.user_email, u.USER_NICKNAME, u.USER_IMG,
+	    mm.mag_num, mm.mag_date, mm.mag_content, mm.mag_date, mm.mag_savecnt, mm.mag_tag,
+	    mm.mag_title, mm.mag_viewcnt, mm.mag_photo, 
+	    c1.text as mag_house, c2.text as mag_size, c3.text as mag_style
+		 from user u , magazine mm
+	     left join category as c1 on mm.mag_house = c1.code
+	      left join category as c2 on mm.mag_size = c2.code
+	      left join category as c3 on mm.mag_style = c3.code
+		 where 
+	     mm.user_email = u.user_email and
+	     mm.mag_num = #{mag_num}
+	</select>
+	
+	<update id="updateMag" parameterType="hashmap">
+	update Magazine 
+	set 
+		mag_date=now(),
+		mag_house=#{mag_house},
+		mag_size=#{mag_size},
+		mag_style=#{mag_style},
+		mag_title=#{mag_title},
+		mag_content=#{mag_content},
+		mag_photo=#{mag_photo},
+		mag_tag=#{mag_tag}
+	 where mag_num = #{mag_num}
+	</update>
+	
+	<delete id="updateBeforeDeleteMagImg" parameterType="hashmap">
+	delete from magazine_img
+	where mag_num = #{mag_num}
+	</delete>
+	
+	<insert id="updateMagImg" parameterType="hashmap">
+		insert into magazine_img (mag_num,mag_img) 
+		value(#{mag_num},#{originalFileName})
+	</insert>
+	
+	<delete id="deleteMag" parameterType="hashmap">
+	delete from Magazine
+	where mag_num = #{mag_num}
+	</delete>
+
+	
+	<insert id="addComment" parameterType="hashmap">
+		insert into magazine_comment values(
+		#{user_email}, #{mag_num}, null, #{mag_com_content}, now())
+	</insert>
+	
+	<select id="listComment" resultType="hashmap">
+		select * from magazine_comment, user
+		where magazine_comment.user_email = user.user_email
+		and magazine_comment.mag_num = #{mag_num}
+		order by magazine_comment.mag_com_num desc
+			
+	</select>
+	
+	<delete id="removeComment" parameterType="hashmap">
+		delete from magazine_comment where mag_com_num = #{mag_com_num}
+	</delete>
+	
+	<update id="updateComment" parameterType="hashmap">
+		update magazine_comment 
+		set 
+		mag_com_content = #{mag_com_content}, 
+		mag_com_date = now()
+		where mag_com_num = #{mag_com_num}
+	</update>
+	<update id="updateViewCnt" parameterType="hashmap">
+		update magazine 
+		set	mag_viewcnt = mag_viewcnt + 1
+		where mag_num = #{mag_num}	
+	</update>
+	
+	<select id="cntMagComm" resultType="int">
+		select count(mag_com_num)
+		from magazine_comment 
+		where mag_num = #{mag_num};
+	</select>
+	
+	
+	<insert id="magAllImg" parameterType="hashmap">
+		insert into magazine_img (mag_num,mag_img) 
+		value((select max(mag_num) from magazine),#{originalFileName})
+		
+	</insert>
+	
+	<select id="magForm2" resultType="hashmap">
+		select * from magazine
+		where 
+		mag_num = (select max(mag_num) from magazine);
+	</select>
+	
+	<update id="update_from" parameterType="hashmap">
+		update magazine 
+		set	mag_content = #{mag_content}
+		where mag_num = #{mag_number}	
+	</update>
+	
+	<select id="form2_search" resultType="hashmap">
+	<![CDATA[ 
+		select * from product
+		where 
+		bi_category = #{bi_category}
+		and 
+		pr_category = #{pr_category}
+		and 
+		pr_title like '%${search_value}%'
+		order by pr_num desc
+	]]>	
+	</select>
+	
+	<select id="searchReportUser" resultType="int">
+		select count(report_num) from report
+		where user_email = #{USER_EMAIL}
+		and mag_com_num =#{mag_com_num}
+	</select>
+	
+	<insert id="magCommReport" parameterType="hashmap">
+		insert into report 
+		(USER_EMAIL, mag_com_num, rp_date) 
+		values(#{USER_EMAIL}, #{mag_com_num}, now());
+	</insert>
+	
+	<select id="updateDetailMagImg" resultType="hashmap">
+		select * from magazine_img
+		where mag_num = #{mag_num}
+	</select>
+	
+  </mapper>

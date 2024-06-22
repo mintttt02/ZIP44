@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+	
+	
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+		<!-- DB정보 -->
+		<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+			<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
+			
+			<property name="url" value="jdbc:log4jdbc:mysql://192.168.0.165:3306/maison?serverTimezone=UTC"/>
+			<property name="username" value="jht0725"/>
+			
+			<!-- <property name="url" value="jdbc:log4jdbc:mysql://localhost:3306/maison?serverTimezone=UTC"/>
+ 			<property name="username" value="root"/>  -->
+ 		
+        	<property name="password" value=""/>
+		</bean>
+		<!-- DB정보 -->
+		
+		<!-- XML Mapper(쿼리문 작성 파일)를 인식시키기 위한 설정 (MyBatis sqlSessionFactory) -->
+		<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+			<property name="dataSource" ref="dataSource" />
+			<property name="configLocation" value="classpath:/mybatis-config.xml" />
+			<property name="mapperLocations" value="classpath:/mappers/**/*Mapper.xml" />
+		</bean>
+		
+		
+	<!-- 메일 -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+    <property name="host" value="smtp.gmail.com" />
+    <property name="port" value="587" />
+    <property name="username" value="GreenMaison12@gmail.com" />
+    <property name="password" value="maison1234*" />
+    <property name="javaMailProperties">
+        <props>
+            <prop key="mail.smtp.auth">true</prop>
+            <prop key="mail.smtp.starttls.enable">true</prop>
+        </props>
+    </property>
+	</bean>
+	
+		<!-- DAO에서 DB와 연결을 맺고 작업이 완료된 후에 연결을 close()하는 작업을 제공하는 클래스 (MyBatis sqlSessionTemplate) -->
+		<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate" destroy-method="clearCache">
+			<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory" />
+		</bean>
+		
+		<!-- 설정된 패키지를 자동으로 인식 -->
+		<!-- DAO패키지 -->
+		<context:component-scan base-package="com.company.persistence"></context:component-scan>
+		<!-- Service패키지 -->
+		<context:component-scan base-package="com.company.service"></context:component-scan>
+</beans>

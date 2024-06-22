@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.company.mapper.StoreMapper">
+	
+	<!-- 상품정보 등록 -->
+	<insert id="insertProduct" parameterType="hashmap">
+		insert into PRODUCT 
+		(USER_EMAIL, 
+		bi_category, pr_category, 
+		pr_brand, pr_title, 
+		pr_price, pr_sale, pr_delivery, pr_deli_type, pr_cnt,   
+		pr_phone, pr_back, 
+		pr_date)
+		values 
+		(#{USER_EMAIL}, 
+		#{bi_category}, #{pr_category}, 
+		#{pr_brand}, #{pr_title}, 
+		#{pr_price}, #{pr_sale}, #{pr_delivery}, #{pr_deli_type}, #{pr_cnt},    
+		#{pr_phone}, #{pr_back}, 
+		now())
+	</insert>
+	
+		<!-- 상품 옵션 등록 -->
+	<insert id="insertOpt" parameterType="hashmap">
+		insert into PRODUCT_OPTION 
+		(bi_category, pr_num, 
+		option1_title, option1, 
+		option2_title, option2,
+		option3_title, option3,
+		option_cnt, option_price)
+		values
+		(#{bi_category}, (select max(pr_num) from PRODUCT),
+		#{option1_title}, #{option1}, 
+		#{option2_title}, #{option2}, 
+		#{option3_title}, #{option3},
+		 #{option_cnt}, #{option_price})
+	</insert>
+	
+	<!-- 상품 대표 이미지 등록 -->
+	<insert id="insertProductImg" parameterType="hashmap">
+		insert into PRODUCT_img (pr_num, pr_img)
+		values ((select max(pr_num) from PRODUCT), #{pr_img})
+	</insert>
+	
+	<!-- 상품 상세내용 이미지 등록 -->
+	<insert id="insertProductDetailImg" parameterType="hashmap">
+		insert into PRODUCT_DETAIL_img (pr_num, pr_detail_img)
+		values ((select max(pr_num) from PRODUCT), #{pr_detail_img})
+	</insert>
+	
+	<!-- 상품리스트 출력 -->
+	<select id="selectProduct" resultType="hashmap">
+		<![CDATA[
+		select * from PRODUCT p1, PRODUCT_img p2
+		where p1.pr_num = p2.pr_num and p2.pr_img_num in (select min(pr_img_num) from PRODUCT_img group by pr_num)
+		order by pr_date desc
+		limit 0, 21
+		]]>
+	</select>
+	
+	<!-- 페이징 -->
+	<select id="listCriteria" resultType="hashmap">
+ 		<![CDATA[
+ 		select * from PRODUCT
+ 		order by pr_date desc
+ 		limit #{pageStart}, #{perPageNum}
+ 		]]>
+ 	</select>
+ 	
+ 	<!-- 페이징 카운터 -->
+ 	<select id="countPaging" resultType="int">
+ 		<![CDATA[
+ 		select count(*) from product p1, product_img p2
+		where p1.pr_num = p2.pr_num and p2.pr_img_num in (select min(pr_img_num) from product_img group by pr_num)
+		order by pr_date desc;
+ 		]]>
+ 	</select>
+	
+	<!-- 인기상품 출력 -->
+	<select id="selectBest" resultType="hashmap">
+		<![CDATA[
+		select * from PRODUCT p1, PRODUCT_img p2
+		where p1.pr_num = p2.pr_num and p2.pr_img_num in (select min(pr_img_num) from PRODUCT_img group by pr_num)
+		order by pr_viewcnt desc
+		limit 0,8
+		]]>
+	</select>
+	
+	<!-- 상품 정보 출력(단일품목) -->
+	<select id="selectProductDetail" parameterType="hashmap" resultType="hashmap">
+		select * from PRODUCT
+		where pr_num = #{pr_num}
+	</select>
+	
+	<!-- 상품 대표이미지 출력 -->
+	<select id="selectProductImg" resultType="hashmap">
+		<![CDATA[
+		select * from product p1, product_img p2
+		where p1.pr_num = p2.pr_num and p1.pr_num = #{pr_num};
+		]]>
+	</select>
+	
+	<!-- 상품 상세내용 이미지 출력 -->
+	<select id="selectProductDetailImg" resultType="hashmap">
+		<![CDATA[
+		select pr_detail_img from PRODUCT p1, PRODUCT_DETAIL_img p2
+		where p1.pr_num = p2.pr_num and p1.pr_num = #{pr_num};
+		]]>
+	</select>
+	
+	<!-- 상품 옵션 출력 -->
+	<select id="selectOpt" parameterType="hashmap" resultType="hashmap">
+		select * from PRODUCT_OPTION
+		where pr_num = #{pr_num}
+	</select>
+	
+<!-- 	<select id="selectOpt1" parameterType="hashmap" resultType="hashmap"> -->
+<!-- 		<![CDATA[ -->
+<!-- 		select distinct option1, option_price from PRODUCT_OPTION -->
+<!-- 		where pr_num = #{pr_num} -->
+<!-- 		]]> -->
+<!-- 	</select> -->
+	
+<!-- 	<select id="selectOpt2_title" parameterType="hashmap" resultType="hashmap"> -->
+<!-- 		select distinct option2_title from PRODUCT_OPTION -->
+<!-- 		where pr_num = #{pr_num} -->
+<!-- 	</select> -->
+	
+<!-- 	<select id="selectOpt2" parameterType="hashmap" resultType="hashmap"> -->
+<!-- 		<![CDATA[ -->
+<!-- 		select distinct option2, option_price from PRODUCT_OPTION -->
+<!-- 		where pr_num = #{pr_num} -->
+<!-- 		]]> -->
+<!-- 	</select> -->
+	
+<!-- 	<select id="selectOpt3_title" parameterType="hashmap" resultType="hashmap"> -->
+<!-- 		select distinct option3_title from PRODUCT_OPTION -->
+<!-- 		where pr_num = #{pr_num} -->
+<!-- 	</select> -->
+	
+<!-- 	<select id="selectOpt3" parameterType="hashmap" resultType="hashmap"> -->
+<!-- 		<![CDATA[ -->
+<!-- 		select distinct option3, option_price from PRODUCT_OPTION -->
+<!-- 		where pr_num = #{pr_num} -->
+<!-- 		]]> -->
+<!-- 	</select> -->
+	
+	<!-- 상품 조회시 조회수 증가 -->
+	<update id="updateViewCnt">
+		update PRODUCT
+		set pr_viewcnt = pr_viewcnt + 1
+		where pr_num = #{pr_num}
+	</update>
+	
+	<!-- 상품리스트 출력(판매자 페이지)  -->
+	<select id="selectAllProduct" resultType="hashmap">
+		<![CDATA[
+		select * from PRODUCT p1, PRODUCT_img p2
+		where p1.pr_num = p2.pr_num and p2.pr_img_num in (select min(pr_img_num) from PRODUCT_img group by pr_num)
+		order by pr_date desc
+		limit #{pageStart}, #{perPageNum}
+		]]>
+	</select>
+	
+	<!-- 상품리스트 출력(페이징 카운터) -->
+	<select id="countProductPaging" resultType="int">
+ 		<![CDATA[
+ 		select count(*) from PRODUCT p1, PRODUCT_img p2
+ 		where p1.pr_num = p2.pr_num and p2.pr_img_num in (select min(pr_img_num) from PRODUCT_img group by pr_num)
+		order by pr_date desc;
+ 		]]>
+ 	</select>
+ 	
+ 	<!-- 카테고리별 상품 출력  -->	
+ 	<select id="selectCategoryProduct" parameterType="hashmap" resultType="hashmap">
+ 		<![CDATA[
+		select * from PRODUCT p1, PRODUCT_img p2
+		where p1.pr_num = p2.pr_num and p2.pr_img_num in (select min(pr_img_num) from PRODUCT_img group by pr_num)
+		and bi_category = #{bi_category}
+		order by pr_date desc
+		limit #{pageStart}, #{perPageNum}
+		]]>
+ 	</select>
+ 	
+ 	<!-- 카테고리별 상품출력 시 페이징 카운터  -->
+ 	<select id="countCategoryProduct_Paging" resultType="int">
+ 		<![CDATA[
+ 		select count(*) from PRODUCT p1, PRODUCT_img p2
+ 		where p1.pr_num = p2.pr_num and p2.pr_img_num in (select min(pr_img_num) from PRODUCT_img group by pr_num)
+ 		and bi_category = #{bi_category}
+		order by pr_date desc;
+ 		]]>
+ 	</select>
+ 	
+ 	<!-- 주문완료 시 상품 대표이미지 출력  -->
+ 	<select id="selectOrderImg" parameterType="hashmap" resultType="hashmap">
+ 		select pr_img from product p1, product_img p2
+		where p1.pr_num = p2.pr_num and p1.pr_num = #{pr_num} 
+		and p2.pr_img_num in (select min(pr_img_num) from PRODUCT_img group by pr_num);
+ 	</select>
+ 	
+ 	<!-- 주문등록  -->
+ 	<insert id="insertOrder" parameterType="hashmap">
+ 		insert into ORDER_LIST 
+ 		(USER_EMAIL, bi_category, pr_num, od_cnt, od_pr_name,
+ 		opt_value, pay_complete, od_complete, od_back, pr_deli_type,
+ 		od_name, taker_name, od_addr_num, od_add, od_postcode, od_n_phone, od_phone, od_msg,
+ 		od_price,od_method, od_d_price, od_discount, od_all_price, od_date,
+ 		od_deposit_name, od_deposit_bank)
+ 		values
+ 		(#{USER_EMAIL}, #{bi_category}, #{pr_num}, #{od_cnt}, #{od_pr_name},
+ 		 #{opt_value}, default, default, default, #{pr_deli_type},
+ 		 #{od_name}, #{taker_name}, #{od_addr_num}, #{od_add}, #{od_postcode}, #{od_n_phone}, #{od_phone}, #{od_msg},
+ 		 #{od_price}, #{od_method}, #{od_d_price}, #{od_discount}, #{od_all_price}, now(),
+ 		 #{od_deposit_name}, #{od_deposit_bank}) 
+ 	</insert>
+ 	
+ 	<!-- 주문상세 정보 출력  -->
+ 	<select id="selectOrderDetail" parameterType="hashmap" resultType="hashmap">
+ 		select * from ORDER_LIST
+ 		where od_num = (select max(od_num) from ORDER_LIST)
+ 	</select>
+ 	
+ 	<!-- 옵션이 있는 상품 구매 시 옵션 재고 감소  -->
+ 	<update id="updateOptCnt" parameterType="hashmap">
+ 		update PRODUCT_OPTION 
+ 		set option_cnt = option_cnt - #{od_cnt}
+ 		where option_num = #{opt_no}
+ 	</update>
+ 	<!-- 재고 확인 -->
+ 	<select id="checkProductCnt" parameterType="hashmap" resultType="int">
+		select pr_cnt from product
+ 		where pr_num = #{pr_num}
+ 	</select>
+ 	 	<!-- 옵션재고 확인 -->
+ 	<select id="CheckOptCnt" parameterType="hashmap" resultType="int">
+		select option_cnt from PRODUCT_OPTION
+ 		where option_num=#{opt_no}
+ 	</select>
+ 	
+ 	<!-- 주문 시 재고 감소  -->
+ 	<update id="updateProductCnt" parameterType="hashmap">
+ 		update PRODUCT
+ 		set pr_cnt = pr_cnt - #{od_cnt}
+ 		where pr_num = #{pr_num}
+ 	</update>
+ 	
+ 	<!-- 상품 삭제 -->
+ 	<delete id="deleteProduct" parameterType="hashmap">
+ 		delete from PRODUCT
+ 		where pr_num = #{pr_num}
+ 	</delete>
+ 	
+ 	<!-- 주문리스트(판매자 페이지) -->
+ 	<select id="selectOrder" resultType="hashmap">
+		<![CDATA[
+		select * from ORDER_LIST
+		order by od_date desc
+		limit #{pageStart}, #{perPageNum}
+		]]>
+	</select>
+	
+	<!-- 주문리스트 출력(페이징 카운터) -->
+	<select id="countOrderPaging" resultType="int">
+ 		<![CDATA[
+ 		select count(*) from ORDER_LIST
+		order by od_date desc;
+ 		]]>
+ 	</select>
+ 	
+ 	<update id="updateOrder">
+ 		update ORDER_LIST set pay_complete = #{pay_complete}, od_complete = #{od_complete}, od_back = #{od_back}
+ 		where od_num = #{od_num}
+ 	</update>
+ 	
+ 	<!-- 상품 Q&A 등록 -->
+ 	<insert id="insertQnA">
+ 		insert into QnA
+ 		(bi_category, pr_num, USER_EMAIL, USER_NAME, qq_title, qq_content, qq_date)
+ 		values (#{bi_category}, #{pr_num}, #{USER_EMAIL}, #{USER_NAME}, #{qq_title}, #{qq_content}, now())
+ 	</insert>
+ 	
+ 	<!-- 상품 Q&A 출력 -->
+ 	<select id="selectQnA" parameterType="hashmap" resultType="hashmap">
+ 		select * from QnA
+ 		where pr_num = #{pr_num}
+ 	</select>
+ 	
+ 	<!-- 카트 타입 업데이트 -->
+ 	<update id="update_cartType_default" parameterType="hashmap" >
+ 		update cart set 
+ 		cart_type = 0 
+ 		where 
+ 		user_email = #{USER_EMAIL}
+ 	</update>
+ 	<update id="update_cartType" parameterType="hashmap" >
+ 		update cart set 
+ 		cart_type = 1 
+ 		where 
+ 		cart_num = #{cart_num}
+ 	</update>
+
+ 	<select id="product_info" parameterType="hashmap" resultType="hashmap">
+	select 
+	p.bi_category,
+	c.pr_num,
+	c.cart_cnt,
+	p.pr_deli_type,
+	p.pr_title,
+	c.cart_opt_value,
+	p.pr_price,
+	p.pr_delivery,
+	(p.pr_price * (p.pr_sale * 0.01) * c.cart_cnt)as discount,
+	(p.pr_price * c.cart_cnt)+po.option_price-((p.pr_price * (p.pr_sale * 0.01) * c.cart_cnt)) as price_noDeli,
+	c.cart_opt_num,
+	c.cart_num,p.pr_brand
+	from cart c, 
+	product p, PRODUCT_OPTION po
+	where 
+	((c.cart_opt_num is null)
+	or (c.cart_opt_num = po.option_num) )
+	and c.pr_num = p.pr_num
+	and c.user_email = #{USER_EMAIL}
+	and c.cart_type=1
+	group by c.cart_num;
+	
+ 	</select>
+ 	
+ 	<select id="pr_delivery" parameterType="hashmap" resultType="hashmap">
+	select p.pr_delivery from 
+	cart c, product p
+	where 
+	 c.pr_num = p.pr_num
+	and c.user_email = #{USER_EMAIL}
+	and c.cart_type=1
+	group by p.pr_num;
+ 	</select>
+ 	
+ 	<select id="payAfterDetailImg" parameterType="hashmap" resultType="hashmap">
+ 	select * 
+	from cart c, product_img pi
+	where 
+	c.pr_num = pi.pr_num
+	and c.cart_type = 1
+	and c.user_email = #{USER_EMAIL}
+	and pi.pr_img_num in (select min(pr_img_num) from PRODUCT_img group by pr_num)
+ 	</select>
+ 	<delete id="deleteCart" parameterType="hashmap" >
+ 	delete from cart
+ 	where 
+ 	cart_type = 1
+	and user_email = #{USER_EMAIL}
+ 	</delete>
+ 	
+ 	
+</mapper>

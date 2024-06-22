@@ -1,0 +1,16 @@
+@charset "UTF-8";
+*{box-sizing: border-box;}
+.mag_update{
+	margin : auto;
+	margin-top: 95px;
+	width: 1000px;
+}
+.mag_photo_div img{
+	width: 200px;
+}
+.mag_update h3{
+	text-align: center;
+}
+.tag_div{
+display: none;
+}

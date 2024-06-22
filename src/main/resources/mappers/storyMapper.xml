@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.company.mapper.StoryMapper">
+
+	<insert id="writeStory" parameterType="hashmap">
+		insert into STORY (USER_EMAIL, st_content, ST_DATE)
+		values (#{USER_EMAIL}, #{st_content}, now())
+	</insert>
+	
+	<select id="listStory" resultType="hashmap">
+		<![CDATA[
+		select * from STORY, user
+		where 
+        STORY.user_email = user.user_email and
+        st_num > 0
+		order by ST_NUM desc
+		limit 0, 10;
+		]]> 
+	</select>
+	
+	<select id="storyScrolldown" resultType="hashmap" >
+		select * from STORY, user
+		where 
+		STORY.user_email = user.user_email and
+		#{st_num}  > st_num
+		order by ST_NUM desc
+        limit 0, 10;
+	</select>
+	
+	<delete id="storyDelete" parameterType="hashmap">
+		delete from story
+		where st_num = #{st_num}
+	</delete>
+	
+	<insert id="saveStoryImg" parameterType="hashmap">
+		insert into st_img
+		values(#{st_num}, null, #{st_img})
+	</insert>
+	
+	<select id="getStoryNum" resultType="int">
+		select max(st_num) from story
+	</select>
+	
+	<select id="storyImgList" resultType="hashmap">
+		select * from st_img
+		where st_num >= (
+		select st_num from STORY E1 where 
+		(10 - 1) = (select count(distinct(st_num)) 
+		from STORY E2 
+		where E2.st_num > E1.st_num ));
+	</select>
+	
+	<select id="storyScrolldownImgList" resultType="hashmap" >
+			select * from st_img
+		where 
+		STORY.user_email = user.user_email and
+		#{st_num}  > st_num
+		order by ST_NUM desc
+        limit 0, 10;
+
+	</select>
+	
+	<select id="delStoryImgList" resultType="hashmap">
+		select * from st_img
+		where st_num = #{st_num}
+	</select>
+	
+	<select id="searchReportUser" resultType="int">
+		select count(report_num) from report
+		where user_email = #{USER_EMAIL}
+		and st_num =#{st_num}
+	</select>
+	
+	<insert id="stReport" parameterType="hashmap">
+		insert into report 
+		(USER_EMAIL, st_num, rp_date) 
+		values(#{USER_EMAIL}, #{st_num}, now());
+	</insert>
+	
+	<update id="updateLike">
+		update story 
+		set st_like = st_like+1
+		where st_num = #{st_num}
+	</update>
+	
+	<insert id="updateSt_like">
+		insert into st_like 
+		values(#{st_num}, #{user_email}, now());
+	</insert>
+	
+	<select id="updateSt_like_cnt" resultType="int">
+		select count(st_num) from st_like
+		where 
+		st_num = #{st_num}
+		and user_email = #{user_email}
+	</select>
+	
+</mapper>

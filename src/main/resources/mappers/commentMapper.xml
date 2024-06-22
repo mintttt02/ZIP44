@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.company.mapper.CommentMapper">
+<!--  조인해서 값 들고올때는 vo에도 선언해줄것!!!  -->
+
+	<select id="list" resultType="hashmap">
+		select * from st_comment, user
+		where st_comment.user_email = user.user_email
+		and st_comment.st_num = #{st_num}
+		order by st_comment.st_num desc
+			
+	</select>
+	
+	<insert id="create" parameterType="hashmap">
+		insert into st_comment (st_num, st_com_content, user_email, st_com_date)
+		values (#{st_num}, #{st_com_content}, #{user_email}, now())
+	</insert>
+	
+	<update id="update" parameterType="hashmap">
+		update st_comment set st_com_content = #{st_com_content}, st_com_date = now()
+		where st_com_num = #{st_com_num}
+	</update>
+	
+	<delete id="delete" parameterType="hashmap">
+		delete from st_comment where st_com_num = #{st_com_num}
+	</delete>
+	
+	<select id="searchReportUser" resultType="int">
+		select count(report_num) from report
+		where user_email = #{USER_EMAIL}
+		and st_com_num =#{st_com_num}
+	</select>
+	
+	<insert id="st_com_report" parameterType="hashmap">
+		insert into report 
+		(USER_EMAIL, st_com_num, rp_date) 
+		values(#{USER_EMAIL}, #{st_com_num}, now());
+	</insert>
+
+	
+</mapper>

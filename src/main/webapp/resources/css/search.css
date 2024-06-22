@@ -1,0 +1,83 @@
+@charset "UTF-8";
+/* 작성자 : 조현호 */
+.search_wrapper * {
+	box-sizing:border-box;
+}
+.search_wrapper {
+	width:1020px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:90px;
+	padding-left:15px;
+	padding-right:15px;
+}
+.search_title {
+	width:100%;
+	border-bottom:1px solid #e8e8e8;
+	font-size:20px;
+	text-align:center;
+	margin-top:30px;
+	margin-bottom:50px;
+	padding-bottom:20px;
+}
+.search_form {
+	border:1px solid #d9dadb;
+	position:relative;
+	padding:10px;
+	height:60px;
+}
+.search_icon {
+	position:absolute;
+	top:18px;
+	left:24px;
+}
+.search_icon img {
+	width:25px;
+}
+.search_form input {
+	colod:black;
+	padding:10px 10px 10px 50px;
+	border:0;
+	font-size:16px;
+}
+.search_keyword {
+	margin-top:15px;
+	margin-bottom:2px;
+	color:#afafaf;
+	font-size:14px;
+	margin-left:5px;
+}
+.search_keyword .recent {
+	cursor:pointer;
+	padding-bottom:10px;
+}
+.search_keyword .pipe {
+	margin:0 15px 0 15px;
+}
+.search_keyword .popular {
+	cursor:pointer;
+	padding-bottom:10px;
+}
+.search_keyword .selected {
+	color:917751;
+	border-bottom:2px solid #917751;
+}
+.search_keyword_list {
+	padding-left:15px;
+	padding-right:15px;
+	font-size:18px;
+}
+.list_item:first-child {
+	margin-top:18px;
+}
+.list_item {
+	cursor:pointer;
+	display:inline-block;
+	width:85%;
+	margin-left:21px;
+	padding-bottom:15px;
+	padding-top:20px;
+}
+
+
+

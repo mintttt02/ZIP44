@@ -1,0 +1,127 @@
+@charset "UTF-8";
+
+.newAddr_wrap * {
+	margin:0px;
+	padding:0px;
+	box-sizing: border-box;
+}
+.newAddr_wrap {
+	width: 1020px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 70px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.newAddr_wrap input {
+	margin-bottom: 3px;
+}
+.newAddr_container {
+	width: 1020px;
+	margin-top: 15px;
+	margin-bottom: 70px;
+	margin-right: auto;
+	margin-left: auto;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.newAddr {
+	width:100%;
+	margin-left: -15px;
+	margin-right: -15px;
+}
+.newAddr_subtitle {
+	line-height: 46px;
+	width: 33.33333333%;
+	float: left;
+	position: relative;
+	min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.red {
+	color: red;
+}
+.newAddr_input {
+	width: 66.66666667%;
+	display: inline-block;
+	position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.newAddr_input input {
+	width: 100%;
+    border: 1px solid #dfdfdf;
+    background-color: #fff;
+    height: 46px;
+    padding-left: 5px;
+}
+.newAddr_underline {
+	margin: 15px 0 15px 0;
+    border-bottom: 1px solid #dfdfdf;
+    clear: left;
+}
+.newAddr_postNo {
+	width: 50%;
+	display: inline-block;
+	float:left;
+}
+.newAddr_search_postNo {
+	width: 50%;
+	display: inline-block;
+}
+.search_zipcode {
+	border: 1px solid #917751;
+    padding-left: 0;
+    color: #917751;
+    width: 100%;
+    background-color: #fff;
+    height: 46px;
+    padding-left: 5px;
+    text-align: center;
+    line-height: 46px;
+    cursor: pointer;
+}
+.select_telNo {
+	display: inline-block;
+}
+select.tel {
+	width: 62px;
+	border: 1px solid #dfdfdf;
+    background-color: #fff;
+    height: 46px;
+    padding-left: 5px;
+}
+input.tel {
+	width: 62px;
+	border: 1px solid #dfdfdf;
+    background-color: #fff;
+    height: 46px;
+    padding-left: 5px;
+}
+.select_phoneNo {
+	display: inline-block;
+}
+.newAddr_input textarea {
+	width: 100%;
+	height: 78px;
+	border: 1px solid #dfdfdf;
+	background: #fff;
+	padding: 8px;
+}
+.msg_notice {
+	color: #afafaf;
+    font-size: 12px;
+}
+.newAddr_saveBtn {
+	cursor: pointer;
+    width: 50%;
+    height: 56px;
+    font-size: 16px;
+    background-color: #917751;
+    color: white;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 50px;
+}

@@ -1,0 +1,70 @@
+@charset "UTF-8";
+/*작성자 : 최나현*/
+*{box-sizing: border-box;}
+a{
+color: black;
+text-decoration: none;
+}
+.search_result_wrap{
+	 margin-left: auto;
+    margin-right: auto;
+    width: 1020px;
+    margin-top: 90px;
+}
+.search_form{
+	border: 1px solid #d9dadb;
+    position: relative;
+    padding: 10px;
+    height: 60px;
+}
+.search_icon{
+	position: absolute;
+    top: 18px;
+    left: 24px;
+}
+.search_icon img{
+	width: 25px;
+}
+.search_form input{
+	color: black;
+    padding: 10px 10px 10px 50px;
+    -webkit-appearance: none;
+    border: 0;
+    height: 20px;
+    width: 82%;
+    font-size: 16px;
+}
+.search_filter{
+	    margin-top: 23px;
+    margin-bottom: 30px;
+}
+.search_tap{
+	font-size: 14px;
+    padding-bottom: 9px;
+    display: inline-block;
+    padding-left: 3px;
+    padding-right: 3px;
+    cursor: pointer;
+}
+.selected{
+	color: #917751;
+    border-bottom: 2px solid #917751;
+}
+.section_title{
+	width: auto;
+    position: relative;
+    font-size: 1.2em;
+    font-weight: 500;
+    margin-bottom: 25px;
+    margin-top: 30px;
+    padding-left: 7px;
+}
+.section_title .more{
+	position: absolute;
+    right: 0;
+    font-size: .8em;
+    color: #afafaf;
+    cursor: pointer;
+    padding-top: 3px;
+    padding-right: 13px;
+}

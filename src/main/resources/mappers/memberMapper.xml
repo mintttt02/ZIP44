@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<!-- MemberDAOImpl에서 mapper를 실행하기 위한 이름 --> 
+<mapper namespace="com.company.mapper.MemberMapper">
+ 	
+ 	<insert id="insertIpAddr" parameterType="hashmap">
+ 		insert into IP_ADDR (ip_addr, login_email)
+ 		values(#{ip_addr}, #{login_email})
+ 	</insert>
+ 	
+ 	<select id="selectIpAddr" resultType="hashmap">
+ 		select * from IP_ADDR
+ 		order by ip_date desc
+ 		limit #{pageStart}, #{perPageNum}
+ 	</select>
+ 	
+ 	<select id="IpAddrPaging" resultType="int">
+ 		select count(*) from IP_ADDR
+ 		order by ip_date desc
+ 	</select>
+ 	
+ 	<!-- id 속성 값은 MemberDAO 인터페이스와 동일하게 설정하여 혼란을 피하는 것이 좋음 -->	
+ 	<insert id="signup" parameterType="hashmap">
+ 		insert into USER (USER_EMAIL, USER_NICKNAME, USER_PASS, USER_JOIN_DATE, USER_SERVICE, USER_INFO)
+ 		values(#{USER_EMAIL}, #{USER_NICKNAME}, #{USER_PASS}, now(), #{USER_SERVICE}, #{USER_INFO})
+ 	</insert>	
+ 	
+ 	<select id="login" resultType="hashmap">
+ 		select USER_IMG, USER_EMAIL, USER_NICKNAME, USER_PASS, USER_TYPE, USER_DENIED, USER_NAME 
+ 		from USER 
+ 		where USER_EMAIL = #{USER_EMAIL} and USER_PASS = #{USER_PASS}
+ 	</select>
+ 	
+ 	
+ 	<select id="listMap" resultType="hashmap">
+ 		<![CDATA[
+ 		select * from USER
+ 		order by USER_JOIN_DATE desc
+ 		]]>
+ 	</select>
+ 	
+ 	<select id="listCriteria" resultType="hashmap">
+ 		<![CDATA[
+ 		select * from USER
+ 		order by USER_JOIN_DATE desc
+ 		limit #{pageStart}, #{perPageNum}
+ 		]]>
+ 	</select>
+ 	
+ 	<select id="countPaging" resultType="int">
+ 		<![CDATA[
+ 		select count(USER_EMAIL) from USER
+ 		order by USER_JOIN_DATE desc
+ 		]]>
+ 	</select>
+ 	
+ 	<select id="detail" parameterType="hashmap" resultType="hashmap">
+ 		select * from USER
+ 		where USER_EMAIL = #{USER_EMAIL}
+ 	</select>
+ 	
+ 	<update id="update" parameterType="hashmap">
+ 		update USER set USER_TYPE = #{USER_TYPE}, USER_DENIED = #{USER_DENIED}
+ 		where USER_EMAIL = #{USER_EMAIL}
+ 	</update>
+ 	
+ 	<delete id="delete" parameterType="hashmap">
+ 		delete from USER
+ 		where USER_EMAIL = #{USER_EMAIL}
+ 	</delete>
+ 		
+ 	<update id="updateProfile" parameterType="hashmap">
+ 		update USER set
+ 		USER_IMG = #{USER_IMG},
+ 		USER_NAME = #{USER_NAME},
+ 		USER_NICKNAME = #{USER_NICKNAME},
+ 		USER_PHONE = #{USER_PHONE},
+ 		USER_SITE = #{USER_SITE},
+ 		USER_MSG = #{USER_MSG}
+ 		where USER_EMAIL = #{USER_EMAIL}
+ 	</update>
+ 	
+ 	<select id="emailChk" parameterType="hashmap" resultType="int">
+ 		<![CDATA[
+ 		select COUNT(USER_EMAIL) from USER 
+ 		where USER_EMAIL = #{USER_EMAIL}
+ 		]]>
+ 	</select>
+ 	
+ 	<select id="nickChk" parameterType="hashmap" resultType="int">
+ 		<![CDATA[
+ 		select COUNT(USER_NICKNAME) from USER 
+ 		where USER_NICKNAME = #{USER_NICKNAME} 
+ 		and user_email != #{USER_EMAIL}
+ 		]]>
+ 	</select>
+ 	
+ 	<update id="updatePassword" parameterType="hashmap">
+ 		update USER set
+ 		USER_PASS = #{USER_PASS}
+ 		where USER_EMAIL = #{USER_EMAIL}
+ 	</update>
+ 	
+ 	<insert id="insertAddr" parameterType="hashmap">
+ 		insert into USER_ADD 
+ 		(USER_EMAIL, 
+ 		add_name, 
+ 		post_code, 
+ 		address1, address2, 
+ 		add_n_phone1, add_n_phone2, add_n_phone3,
+ 		add_phone1, add_phone2, add_phone3, 
+ 		add_msg, 
+ 		add_m_date)
+ 		values 
+ 		(#{USER_EMAIL}, 
+ 		#{add_name}, 
+ 		#{post_code}, 
+ 		#{juso1},#{juso2}, 
+ 		#{tel1},#{tel2},#{tel3}, 
+ 		#{phone1},#{phone2},#{phone3}, 
+ 		#{add_msg}, 
+ 		now())
+ 	</insert>
+ 	
+ 	<select id="selectAddr" resultType="hashmap">
+ 		<![CDATA[
+ 		select add_num, add_name, 
+ 		CONCAT(address1, address2) as address, 
+ 		CONCAT(add_phone1, '-', add_phone2, '-', add_phone3) as add_phone,
+ 		CONCAT(add_n_phone1, '-', add_n_phone2, '-', add_n_phone3) as add_n_phone  
+ 		from USER_ADD
+ 		where USER_EMAIL = #{USER_EMAIL}
+ 		order by add_m_date desc
+ 		]]>
+ 	</select>
+ 	
+ 	<select id="selectOneAddr" parameterType="hashmap" resultType="hashmap">
+ 		select * from USER_ADD
+ 		where add_num = #{add_num}
+ 	</select>
+ 	
+ 	<update id="updateAddr" parameterType="hashmap">
+ 		update USER_ADD set
+ 		post_code = #{post_code}, 
+ 		address1 = #{juso1}, address2 = #{juso2},
+ 		add_n_phone1 = #{tel1}, add_n_phone2 = #{tel2}, add_n_phone3 = #{tel3},
+ 		add_phone1 = #{phone1}, add_phone2 = #{phone2}, add_phone3 = #{phone3},
+ 		add_msg = #{add_msg},
+ 		add_m_date = now()
+ 		where add_num = #{add_num}
+ 	</update>
+ 	
+ 	<delete id="deleteAddr" parameterType="hashmap">
+ 		delete from USER_ADD
+ 		where add_num = #{add_num}
+ 	</delete>
+ 	
+ 	<!-- 내 주문리스트 갯수 -->
+ 	<select id="selectMyOrder" parameterType="hashmap" resultType="int">
+ 		select count(*) from ORDER_LIST
+ 		where USER_EMAIL = #{USER_EMAIL}
+ 	</select>
+ 	
+ 	<!-- 결제대기중인 주문리스트 갯수 -->
+ 	<select id="selectWatingPay" parameterType="hashmap" resultType="int">
+ 		select count(*) from ORDER_LIST
+ 		where USER_EMAIL = #{USER_EMAIL} and pay_complete = 0
+ 	</select>
+ 	
+ 	<!-- 내 주문리스트 -->
+ 	<select id="selectMyOrderList" parameterType="hashmap" resultType="hashmap">
+ 		select * from order_list p1, product_img p2
+		where p1.pr_num = p2.pr_num and p2.pr_img_num in (select min(pr_img_num) from product_img group by pr_num)
+ 		and USER_EMAIL = #{USER_EMAIL}
+ 		order by od_date desc
+ 	</select>
+ 	
+ 	<!-- 주문 상세내역 -->
+ 	<select id="selectMyOrderDetail" parameterType="hashmap" resultType="hashmap">
+ 		select * from order_list p1, product_img p2
+		where p1.pr_num = p2.pr_num and p2.pr_img_num in (select min(pr_img_num) from product_img group by pr_num)
+		and od_num = #{od_num}
+ 	</select>
+ 	
+ 	<!-- 주문 취소 -->
+ 	<delete id="deleteMyOrder">
+ 		delete from ORDER_LIST
+ 		where od_num = #{od_num}
+ 	</delete>
+ 	
+ 	 	<!-- 신고페이징 -->
+ 	<select id="reportList" resultType="hashmap">
+ 		select  distinct ${report_category}, 
+        (
+        select count( ${report_category}) from report r1
+        where r1. ${report_category} = r2. ${report_category}
+        ) as reportCnt 
+
+        from report r2
+        where  ${report_category} is not null
+ 		order by report_num desc
+ 		limit #{pageStart}, #{perPageNum}
+ 	</select>
+ 	
+ 	<select id="reportListCnt" resultType="int">
+ 		select count(distinct r1. ${report_category}) from report r1, report r2
+        where r1. ${report_category} = r2. ${report_category}
+        and r1. ${report_category} is not null;
+ 	</select>
+ 	
+ 	 <select id="magtitle" resultType="hashmap">
+ 		select distinct mc.mag_com_num, mc.mag_num, mm.mag_title, mc.mag_com_content
+        from magazine_comment mc,magazine mm, report rp
+        where 
+        mc.mag_com_num in 
+        (select distinct r1.mag_com_num from report r1, report r2
+        where r1.mag_com_num = r2.mag_com_num
+        and r1.mag_com_num is not null)
+        and mc.mag_num = mm.mag_num
+        and rp.mag_com_num = mc.mag_com_num
+        order by rp.report_num desc
+        limit #{pageStart}, #{perPageNum}
+ 	</select>
+ 	<select id="storyReportDetail" resultType="hashmap">
+ 		select * from story,user
+ 		where 
+ 		story.user_email = user.user_email
+ 		and st_num = #{st_num}
+ 	</select>
+ 	<select id="storyReportImgList" resultType="hashmap">
+ 		select * from st_img
+		where st_num = #{st_num}
+ 	</select>
+ 	<select id="storyCommList" resultType="hashmap">
+ 		select * from st_comment,user
+		where st_num = #{st_num}
+		and st_comment.user_email = user.user_email
+		order by st_comment.st_num desc
+ 	</select>
+ 	<select id="storyNum" resultType="hashmap">
+ 		select  distinct sc.st_num, r2.st_com_num, 
+        (
+        select count( st_com_num) from report r1
+        where r1. st_com_num = r2. st_com_num
+        ) as reportCnt 
+
+        from report r2, st_comment sc
+        where r2.st_com_num is not null
+        and r2.st_com_num = sc.st_com_num
+ 		order by report_num desc
+ 		limit #{pageStart}, #{perPageNum}
+ 	</select>
+ 	<!-- 신고된글삭제 -->
+ 	<delete id="reportDel">
+ 		delete from ${tableName}
+ 		where 
+ 		${columnName} = #{number}
+ 	</delete>
+ 	<!-- 신고취소-->
+ 	<delete id="reportCancel">
+ 		delete from report
+ 		where 
+ 		${delColumn} = #{cancel_num}
+ 	</delete>
+ 	
+ 	<!-- 임시패스워드 -->
+ 	<update id="tmpPsw" parameterType="hashmap" >
+ 		update user 
+ 		set 
+ 		USER_PASS = #{createPass}
+ 		where user_email = #{findPassEmail}
+ 	
+ 	</update>
+ 	
+ 	<!-- 비밀번호찾기 유효한 이메일인지 체크 -->
+ 	<select id="chkEmail" resultType="Integer">
+ 		select count(user_email) from user
+		where user_email = #{findPassEmail}
+ 	</select>
+ 	
+ 	<!-- 장바구니 상품 추가 -->
+ 	<insert id="insertCart" parameterType="hashmap">
+ 		insert into CART(USER_EMAIL, pr_num, cart_date, cart_cnt, cart_opt_num, cart_opt_value) 
+ 		values (#{USER_EMAIL}, #{pr_num}, now(), #{order_cnt}, #{opt_no}, #{opt_text})
+ 	</insert>
+ 	
+ 	<!-- 장바구니 리스트 출력 -->
+ 	<select id="selectCartList" parameterType="hashmap" resultType="hashmap">
+ 		select * from cart p1, product p2, product_img p3
+		where p1.pr_num = p2.pr_num and p1.pr_num = p3.pr_num 
+		and p3.pr_img_num in (select min(pr_img_num) from product_img group by pr_num)
+		and p1.USER_EMAIL = #{USER_EMAIL}
+ 	</select>
+ 	
+ 	<!-- 장바구니 상품 삭제 -->
+ 	<delete id="deleteCart">
+ 		delete from CART 
+ 		where cart_num = #{cart_num}
+ 	</delete>
+</mapper>

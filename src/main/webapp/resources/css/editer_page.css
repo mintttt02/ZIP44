@@ -1,0 +1,48 @@
+@charset "UTF-8";
+/*작성자 최나현*/
+*{
+	box-sizing: border-box;
+}
+.editer_page{
+	width:1020px;
+	margin-top:80px;
+	margin-left:auto;
+	margin-right:auto;
+	padding-left:15px;
+	padding-right:15px;
+	text-align: center;
+}
+.editer_title {
+	font-size:20px;
+	margin-top:10px;
+	border-bottom:1px solid #dfe0e1;
+	padding-bottom:20px;
+}
+.editer_list {
+	font-size:18px;
+	margin-top:30px;
+	margin-bottom:30px;
+}
+.editer_list_item {
+	display:block;
+	height:50px;
+	padding:20px 10px 0 10px;
+	cursor:pointer;
+}
+.editer_menu {
+	float:left;
+	font-size:18px;
+}
+.editer_menu div {
+	display:inline-block;
+}
+.arrow {
+	float:right;
+	margin-right:5px;
+	color:red;
+}
+.editer_underline {
+	border-bottom:1px solid #dfe0e1;
+	float:none;
+	clear:both;
+}

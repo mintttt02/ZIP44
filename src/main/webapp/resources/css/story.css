@@ -1,0 +1,310 @@
+@charset "UTF-8";
+/* 작성자 : 조현호 */
+a {
+	color:#000;
+	text-decoration:none;
+}
+
+* {
+	box-sizing:border-box;
+}
+li{
+	list-style: none;
+}
+.storyrepeat{
+	margin : auto;
+	width:600px;
+}
+/* 스토리 글쓰기 */
+.story_wrapper {
+	min-width:1280px;
+	margin-top:95px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-bottom:20px;
+}
+.story_write {
+	margin : auto;
+	width:600px;
+	border:1px solid #e5e6e9;
+	border-radius:4px;
+	background:white;
+	margin-bottom:20px;
+}
+.write_content {
+	width:100%;
+}
+/* 로그인 한 경우 */
+.write_content textarea {
+	width:100%;
+	height:110px;
+	color:#8c8c8c;
+	font-size:14px;
+	box-sizing:border-box;
+	padding:18px 10px;
+	border:0;
+	resize:none; /* textarea 오른쪽 구석 밑쪽에 '//' 표시 지워줌  */
+}
+/* 로그인 한 경우 */
+
+/* 로그인 하지 않은 경우 */
+.write_content div {
+	width:100%;
+	height:110px;
+	color:#8c8c8c;
+	font-size:14px;
+	box-sizing:border-box;
+	padding:18px 10px;
+	border:0;
+	cursor:pointer;
+}
+/* 로그인 하지 않은 경우 */
+
+.story_hr {
+	padding:10px;
+	box-sizing:border-box;
+}
+.hr_line {
+	width:100%;
+	height:1px;
+	background:#dfdfdf;
+}
+.story_menu {
+	height:36px;
+	padding:0 10px;;
+}
+.story_menu_left {
+	display:inline-block;
+	box-sizing:border-box;
+	color:#fff;
+	font-weight:900;
+	font-size:14px;
+	background:#c8c8c8;
+	border:1px #8c8c8c;
+	border-radius:4px;
+	height:28px;
+	line-height:27px;
+	padding:0 20px;
+	cursor:pointer;
+	position:relative;
+	overflow:hidden;
+}
+.photo_btn {
+	position:absolute;
+	top:0;
+	right:0;
+	margin:0;
+	padding:0;
+	font-size:20px;
+	cursor:pointer;
+	opacity:0;
+}
+.story_menu_right {
+	float:right;
+}
+.create_btn {
+	box-sizing:border-box;
+	color:#fff;
+	font-weight:900;
+	font-size:14px;
+	background:#917751;
+	border:0;
+	border-radius:4px;
+	width:100%;
+	height:28px;
+	padding:0 20px;
+	cursor:pointer;
+}
+/* 스토리 글쓰기 */
+
+.story_item {
+	border:1px solid #e5e6e9;
+	border-radius:3px;
+	margin-bottom:20px;
+	background:white;
+}
+.story_write {
+	padding:10px;
+	box-sizing:border-box;
+}
+.writer_profile {
+	display:inline-block;
+	vertical-align:top;
+	margin-top:10px;
+	margin-left:10px;
+}
+.writer_profile img {
+	object-fit : cover;
+	border-radius:50%;
+	width:50px;
+	height:50px;
+}
+.writer_info {
+	display:inline-block;
+	vertical-align:top;
+	padding-left:6px;
+	margin-top:10px;
+}
+.writer_name {
+	padding-top:4px;
+	display:block;
+	font-size:14px;
+	font-weight:900;
+}
+.writer_datetime {
+	display:block;
+	font-size:11px;
+	padding-top:4px;
+	color:#8c8c8c;
+}
+.writer_option {
+		display: flex;
+	justify-content: flex-end;
+	float:right;
+	margin-right:10px;
+    margin-top:10px;
+}
+.writer_option div{
+	margin-left: 10px;
+}
+
+.writer_report_btn {
+	display:inline-block;
+	color:#969696;
+	cursor:pointer;
+	width:30px;
+	height:30px;
+	text-align:center;
+	line-height:30px;
+	opacity:.6;
+	position:relative;
+}
+.content_description {
+	white-space:normal;
+	font-size:14px;
+	line-height:22px;
+	box-sizing:border-box;
+	padding:5px 10px 20px 10px;
+}
+.content_gallery {
+	margin-bottom:20px;
+	position:relative;
+}
+.slick_list {
+	position:relative;
+	display:block;
+	overflow:hidden;
+}
+.slick-track {
+	opacity:1;
+    width:1683px;
+    transform:translate3d(0px, 0px, 0px);
+	position:relative;
+	top:0;
+	left:0;
+	display:block;
+}
+
+.story_like {
+	padding:15px;
+}
+.story_like img {
+	cursor:pointer;
+	width:20px;
+	height:20px;
+	display:inline-block;
+	vertical-align:middle;
+}
+.like_cnt{
+	font-size:13px;
+}
+.story_reply {
+	border-top:1px solid #f2f2f2;
+	background:#fafafa;
+	padding:10px;
+	box-sizing:border-box;
+	font-size:12px;
+	border-bottom-left-radius:4px;
+	border-bottom-right-radius:4px;
+}
+.reply_write table {
+	width:100%;
+	border-spacing:0;
+    border-collapse:collapse;
+}
+.reply_input {
+	color:#969696;
+	border:1px solid #e5e5e5;
+	background:#fdfdfd;
+	font-size:14px;
+	box-sizing:border-box;
+	padding:5px 10px;
+	width:100%;
+}
+.reply_write_btn {
+	opacity:.6;
+	box-sizing:border-box;
+	color:#fff;
+	font-size:14px;
+	background:#917751;
+	border:0;
+	border-radius:4px;
+	width:100%;
+	height:28px;
+	line-height:18px;
+	cursor:pointer;
+}
+
+/*스토리 댓글*/
+.comWImg{
+	object-fit : cover;
+	border-radius:50%;
+	width:20px;
+	height:20px;
+}
+
+/*프리뷰이미지*/
+.preview div{
+	display: inline-block;
+}
+.previewImgDiv{
+	width: 100px;
+	height: 100px;
+	overflow: hidden;
+	margin-right: 5px;
+}
+.previewImgDiv img{
+	object-fit: cover;
+	height : 200px;
+	width: 100px;
+	position: relative;
+	z-index: 1;
+}
+.story_thum_del{
+	position: absolute;
+	z-index: 9;
+}
+
+/*이미지 슬라이더*/
+.bx-wrapper{
+	box-shadow: none;
+}
+
+.writer_option img{
+	width : 25px;
+}
+.replyLi button{
+	margin-left: 10px;
+	background: #c8c8c8;
+	border : 1px solid #c8c8c8;
+	border-radius: 4px;
+	color: white;
+}
+.comm_report{
+	display: inline-block;
+}
+.st_com_content{
+	border : none;
+	margin-left: 10px;
+	
+}

@@ -1,0 +1,247 @@
+@charset "UTF-8";
+
+.oD_container {
+	width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 70px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.oD_top {
+	background: #efefef;
+	font-size: 12px;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	margin-top: 100px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.oD_row {
+	margin-left: -15px;
+	margin-right: -15px;
+}
+
+.oD_date {
+	text-align: left;
+	width: 48%;
+	float: left;
+	position: relative;
+	min-height: 1px;
+	padding-left: 15px;
+	padding-right: 15px;
+	line-height: 1px;
+}
+
+.oD_number {
+	text-align: right;
+	color: #afafaf;
+	width: 44%;
+	float: left;
+	position: relative;
+	min-height: 1px;
+	padding-left: 15px;
+	padding-right: 15px;
+	line-height: 1px;
+}
+
+.oD_order_info {
+	width: 800px;
+	margin-bottom: 10px;
+}
+
+.oD_col {
+	width: 800px;
+	float: left;
+	position: relative;
+	min-height: 1px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.oD_title {
+	font-size: 18px;
+	margin-top: 10px;
+}
+
+.oD_underline_space {
+	border-bottom: 1px solid #dfdfdf;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.list_item {
+	margin-bottom: 10px;
+	clear: left;
+}
+
+.oD_left {
+	text-align: left;
+	width: 30%;
+	float: left;
+	position: relative;
+	min-height: 1px;
+	padding-left: 15px;
+	padding-right: 15px;
+	margin-bottom: 10px;
+}
+
+.oD_right {
+	text-align: right;
+	width: 62%;
+	float: left;
+	position: relative;
+	min-height: 1px;
+	padding-left: 15px;
+	padding-right: 15px;
+	margin-bottom: 10px;
+}
+
+.btn_modify {
+	font-size: 15px;
+	color: black;
+	border: 1px solid #afafaf;
+	text-align: center;
+	padding: 10px 0 10px 0;
+	margin-bottom: 15px;
+}
+
+.oD_underline {
+	border-bottom: 1px solid #dfdfdf;
+}
+
+.oD_col-2 {
+	width: 46%;
+	float: left;
+	position: relative;
+	min-height: 1px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.total_price {
+	margin-top: 10px;
+	font-size: 18px;
+	text-align: right;
+}
+
+.total_price span {
+	color: #917751;
+}
+
+.payment {
+	color: red;
+	font-weight: 200;
+}
+
+.oD_item {
+	position: relative;
+}
+
+.item_content {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.img_wrapper {
+	width: 40%;
+	float: left;
+	position: relative;
+	min-height: 1px;
+	padding-left: 15px;
+	padding-right: 15px;
+	margin-top: 10px;
+}
+.img_wrapper img {
+	width: 300px;
+	height: 300px;
+}
+
+.oD_col4 {
+	width:40%;
+	float: left;
+	position: relative;
+	min-height: 1px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.oD_item_title {
+	margin-bottom: 0;
+	padding-bottom: 0;
+	padding-left: 0;
+	margin-top: 10px;
+}
+
+.oD_item_option {
+	font-size: .8em;
+	margin-bottom: 5px;
+	color: #afafaf;
+}
+
+.oD_item_price {
+	margin-top: 5px;
+	text-align: left;
+	width: 50%;
+	float: left;
+	position: relative;
+	min-height: 1px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.oD_item_price span {
+	margin-right: 3px;
+	color: #917751;
+}
+
+.btn_cancel {
+	font-size: 15px;
+	color: #917751;
+	border: 1px solid #917751;
+	text-align: center;
+	padding: 10px 0 10px 0;
+	margin-bottom: 15px;
+	margin-top: 10px;
+}
+
+.item_price_area {
+	margin-top: 10px;
+	font-size: .8em;
+	margin-bottom: 20px;
+}
+
+.oD_item_sum_price {
+	float: left;
+	display: inline-block;
+	padding-top: 5px;
+	color: #afafaf;
+	width: 60%;
+	float: left;
+	position: relative;
+	min-height: 1px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.price_value, .delivery_price {
+	color: black;
+}
+
+.oD_item_total_price {
+	float: right;
+	display: inline-block;
+	text-align: right;
+	width: 30%;
+	position: relative;
+	min-height: 1px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.oD_item_total_price span {
+	font-size: 18px;
+	color: #917751;
+}

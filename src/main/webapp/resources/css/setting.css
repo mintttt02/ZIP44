@@ -1,0 +1,178 @@
+@charset "UTF-8";
+/* 작성자 : 조현호 */
+
+/* 프로필 수정 */
+a {
+	color:#000;
+	text-decoration:none;
+}
+.setting_wrapper * {
+	box-sizing:border-box;
+	margin:0px;
+	padding:0px;
+}
+.setting_wrapper {
+	width:1020px;
+	margin-top:80px;
+	margin-left:auto;
+	margin-right:auto;
+}
+.setting_container {
+	border:1px solid #dfdfdf;
+}
+.setting_menu {
+	display:inline-block;
+	vertical-align:top;
+	width:200px;
+}
+.setting_menu_item:first-child {
+	padding-top:20px;
+}
+.setting_content {
+	display:inline-block;
+	padding:20px;
+	vertical-align:top;
+	border-left:1px solid #dfdfdf;
+	min-height:650px;
+}
+.setting_table {
+	widht:100%;
+	border-spacing:0;
+	border-collapse:collapse;
+}
+.setting_table td {
+	font-size:14px;
+	padding:10px;
+}
+.setting_text_center {
+	text-align:center;
+}
+.setting_text_center:first-child {
+	width:120px
+}
+.setting_profile_wrapper {
+	display:inline-block;
+	width:140px;
+	height:140px;
+	margin-left:auto;
+	margin-right:auto;
+	border-radius:50%;
+	position:relative;
+}
+.setting_profile_wrapper img {
+	object-fit : cover;
+	border-radius:50%;
+	width:140px;
+	height:140px;
+}
+.setting_up_picture {
+	position:absolute;
+	bottom:0;
+	right:0;
+	background:#917751;
+	width:36px;
+	height:36px;
+	display:inline-block;
+	color:white;
+	border-radius:18px;
+	line-height:37px;
+	font-size:16px;
+}
+.setting_up_picture input[type="file"] {
+	position:absolute;
+	top:0;
+	right:0;
+	margin:0;
+	padding:0;
+	font-size:20px;
+	cursor:pointer;
+	opacity:0;
+	height:36px;
+	width:36px;
+	z-index:2;
+}
+.setting_up_picture img {
+	position:relative;
+	z-index:1;
+	display:inline-block;
+	width:24px;
+	height:36px;
+}
+.setting_input {
+	border:1px solid #dfdfdf;
+	box-sizing:border-box;
+	padding:5px;
+	font-size:14px;
+	border-radius:4px;
+}
+.setting_table td span {
+	background:#917751;
+	font-size:10px;
+	color:#fff;
+	border-radius:4px;
+	padding:3px;
+	box-sizing:border-box;
+	font-weight:900;
+}
+.setting_underline {
+	height:1px;
+	width:100%;
+	margin-top:15px;
+	margin-bottom:15px;
+	background:#dfdfdf;
+}
+.setting_saveBtn {
+	border:0px;
+	border-radius:4px;
+	text-align:center;
+	font-size:14px;
+	color:#fff;
+	font-weight:bold;
+	padding:10px 15px;
+	display:inline-block;
+	background:#917751;
+	cursor:pointer;
+}
+/* 프로필 수정 */
+
+/* 주소지 수정 */
+.setting_delivery_addr {
+	padding: 3px;
+	margin-bottom: 50px;
+}
+.setting_deli_container {
+	border: 1px solid #dfdfdf;
+	margin-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.setting_deli_content {
+	margin-top: 30px;
+	margin-bottom: 25px;
+}
+.setting_deli_info {
+	float:left;
+	width: 70%;
+	display: inline-block;
+}
+.setting_deli_btn {
+	width: 16.66666667%;
+	display: inline-block;
+}
+.btn_modify, .btn_remove {
+	font-size: 11px;
+	border: 1px solid #dfdfdf;
+	margin-bottom: 5px;
+	padding: 10px 7px;
+	text-align: center;
+}
+.setting_new_add_btn {
+	margin-left:100px;
+	padding:10px 0 10px 0;
+	text-align:center;
+	border:1px solid #dfdfdf;
+	width:600px;	
+}
+/* 주소지 수정 */

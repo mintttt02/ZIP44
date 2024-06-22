@@ -1,0 +1,98 @@
+@charset "UTF-8";
+/* 작성자 : 조현호 */
+.footer{
+	min-width:1280px;
+}
+.footer_wrap {
+	margin-top:100px;
+	border-top:1px solid #e5e5e5;
+	margin-left:auto;
+	margin-right:auto;
+	width:100%;
+	background:white;
+}
+.footer_container {
+	width:1020px;
+	padding-top:50px;
+	margin-left:auto;
+	margin-right:auto;
+	padding-left:15px;
+	padding-right:15px;
+}
+.footer_row {
+	display:block;
+	margin-left:-15px;
+	margin-right:-15px;
+}
+.footer_content {
+	width:22%;
+	float:left;
+	position:relative;
+	min-height:1px;
+	padding-left:15px;
+	padding-right:15px;
+}
+.footer_content h3 {
+	font-size:18px;
+}
+.footer_title_line {
+	width:30px;
+	text-align:left;
+	border-top:1px solid #aaa;
+	padding:0 0 0 0 !important;
+	margin-top:20px;
+	margin-bottom:25px;
+}
+.footer_content p {
+	font-size:13px;
+	color:#888;
+	letter-spacing:-0.5px;
+	margin-top:5px;
+	margin-bottom:5px;
+}
+.footer_info {
+	width:100%;
+	height:150px;
+	background:#f0f0f0;
+	clear:left;
+}
+.footer_info_container {
+	width:1020px;
+	text-align:center;
+	vertical-align:middle;
+	display:flex;
+	margin-right:auto;
+	margin-left:auto;
+	margin-top:58px;
+	padding-left:15px;
+	padding-right:15px;
+}
+.footer_info_menu {
+	display:inline-block;
+	margin-top:30px;
+	margin-right:70px;
+}
+.footer_info_menu li {
+	list-style:none;
+	font-weight:bold;
+	text-align:left;
+	margin-bottom:10px;
+}
+.footer_info_menu li a {
+	font-size:14px;
+	color:#555;
+}
+.footer_division {
+	margin-left:10px;
+	margin-right:10px;
+	color:#aaa;
+}
+.footer_info_menu p {
+	font-size:13px;
+	color:#888;
+	letter-spacing:-0.5px;
+	margin-top:5px;
+	margin-bottom:5px;
+	text-align:left;
+}
+

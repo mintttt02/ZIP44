@@ -1,0 +1,35 @@
+@charset "UTF-8";
+.all_report ul li{
+display:inline-block;
+}
+.all_report *{
+box-sizing: border-box;
+margin: 0 auto;
+padding: 0;
+}
+.all_report{
+margin: auto;
+padding-top: 95px;
+width: 1000px;
+}
+a{
+text-decoration: none;
+color: black;
+}
+.all_report h2{
+text-align:center;
+margin: 20px;
+}
+.all_report span{
+text-overflow: ellipsis;
+}
+.reportTable{
+width: 1000px;
+text-align: center;
+}
+.all_report ul{
+list-style:none; 
+text-align:center;
+margin-top: 20px;
+margin-button: 20px;
+}

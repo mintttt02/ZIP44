@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+.myOrder_myOrder {
+	margin-top: 70px;
+}
+
+.myOrder_container {
+	width: 1020px;
+	font-size: 18px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.myOrder_title {
+	width: 100%;
+	border-bottom: 1px solid #e8e8e8;
+	font-size: 20px;
+	text-align: center;
+	margin-top: 30px;
+	margin-bottom: 50px;
+	padding-bottom: 20px;
+}
+
+.myOrder_menu_item {
+	height: 45px;
+	padding: 20px 10px 0 10px;
+	cursor: pointer;
+}
+
+.myOrder_menu_title {
+	display: inline-block;
+}
+
+.arrow {
+	float: right;
+	margin-left: 5px;
+	color: red;
+}
+
+/* .hide { */
+/* 	display: none; */
+/* } */
+
+.myOrder_underline {
+	border-bottom: 1px solid #dfe0e1;
+	float: none;
+	clear: both;
+}

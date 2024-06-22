@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.company.mapper.EtcMapper">
+  
+  <select id="getPhoto" resultType="hashmap">
+  		<![CDATA[ 
+  		select * from magazine_img
+        where mag_num in 
+			(select * from 
+				(select distinct mag_num 
+                from magazine_img 
+                where mag_num <= #{mag_num}
+                order by mag_num desc
+                limit 0,10)  as li
+			)
+		order by mag_img_num desc;
+		]]>
+	</select>
+    <select id="getMaxmag_num" resultType="Integer">
+		select max(mag_num) from magazine
+	</select>
+  	<select id="getPhoto_filter" resultType="hashmap">
+  	<![CDATA[ 
+		select distinct b.mag_num, b.mag_img_num, b.mag_img
+		from magazine as a,magazine_img as b 
+		where 
+        a.mag_num = b.mag_num and
+		b.mag_num in 
+			(select * from 
+				(select distinct mag_num 
+                from magazine_img 
+                where mag_num <= #{mag_num}-1
+                order by mag_num desc
+                limit 0,10)  as li
+			)
+		and 
+		case when #{lable_house} != 99 then mag_house = #{lable_house}
+		 	else true end
+		and  case when #{lable_size} != 99 then mag_size = #{lable_size}
+		 	else true end
+		and case when #{lable_style} != 99 then mag_style = #{lable_style}
+		 	else true end
+		order by a.${lableOrderby} desc, b.mag_img_num desc;
+	]]>
+	</select>
+  
+  	<select id="getListMag" resultType="hashmap">
+  	<![CDATA[ 
+		select mm.mag_num, mm.mag_photo, mm.mag_title, mm.mag_tag,
+ 		 c1.text as mag_house, c2.text as mag_size, c3.text as mag_style
+		from 
+      magazine as mm 
+      left join category as c1 on mm.mag_house = c1.code
+      left join category as c2 on mm.mag_size = c2.code
+      left join category as c3 on mm.mag_style = c3.code
+		where 
+		mag_title like '%${search_val}%'
+		or mag_tag like '%${search_val}%'
+		or( mag_house = (select code from category where code_num <= 27 and text like '%${search_val}%') )
+		or( mag_size = (select code from category where code_num <= 27 and text like '%${search_val}%') )
+		or( mag_style = (select code from category where code_num <= 27 and text like '%${search_val}%') )
+		group by mag_num
+		order by mag_num desc;
+	]]>
+  	</select>
+  	<select id="getListProduct" resultType="hashmap">
+        select * from product
+		where 
+        pr_title like '%${search_val}%'
+        or pr_brand like '%${search_val}%'
+		or bi_category = (select code from category where ca_field = 'bi_category' and code = #{search_val})
+        or pr_num in (select pr_num from product as pp , (select * from category where code_num >= 35 and text like '%${search_val}%') as cc 
+        where pp.pr_category = cc.code)
+        group by pr_num
+		order by pr_num desc;
+  	</select>
+  	
+  	<select id="getListitemImg" resultType="hashmap">
+  		select pr_img_num, pr_img 
+       from 
+       (select * from product
+		where 
+        pr_title like '%${search_val}%'
+        or pr_brand like '%${search_val}%'
+		or bi_category = (select code from category where ca_field = 'bi_category' and code = #{search_val} )
+        or pr_num in (select pr_num from product as pp , (select * from category where code_num >= 35 and text like '%${search_val}%') as cc 
+        where pp.pr_category = cc.code)
+        group by pr_num
+		order by pr_num desc) p1, 
+        PRODUCT_img p2
+		where 
+        p1.pr_num = p2.pr_num 
+        and p2.pr_img_num in (select min(pr_img_num) from PRODUCT_img group by pr_num)
+		order by p2.pr_num desc;
+  	
+  	</select>
+  </mapper>

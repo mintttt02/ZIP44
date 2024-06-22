@@ -1,0 +1,97 @@
+@charset "UTF-8";
+.pohoto_wrap *{
+	box-sizing: border-box;
+	margin: 0px;
+	padding: 0px;
+}
+a{
+	text-decoration: none;
+}
+.pohoto_wrap{
+	min-width:1280px;
+	margin-right: auto;
+    margin-left: auto;
+    margin-top: 58px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.page_title{
+	width: 100%;
+    border-bottom: 1px solid #e8e8e8;
+    font-size: 20px;
+    text-align: center;
+    margin-top: 80px;
+    margin-bottom: 50px;
+    padding-bottom: 20px;
+}
+/*필터 영역 */
+.maga_filter{
+	margin-top: 100px;
+    text-align: right;
+}
+.maga_f_container{
+	width: 100%;
+    margin: auto;
+}
+.maga_f_s{
+	display: inline-block;
+	margin-left: 15px;
+	position: relative;
+	border-bottom : 1px solid #c3c3c3;
+	height: 40px;
+	
+}
+.maga_selector{
+	width: 100%;
+    height: 40px;
+    min-height: 40px;
+    line-height: 40px;
+    padding: 0 10px;
+    opacity: 0;
+}
+.maga_label{
+   position: absolute;
+    font-size: 12px;
+    color: #646464;
+    top: 13px;
+    left: 12px;
+    letter-spacing: 1px; /*글자간격*/
+   }
+#maga_f_submit{
+	border : none;
+}
+.maga_f_s input{
+	display: inline-block;
+    border: 1px solid #917751;
+    color: #917751;
+    padding: 8px 13px;
+    cursor: pointer;
+    background-color: transparent;
+    border-radius: 4px;
+    font-size: 12px;
+    vertical-align: middle;
+    margin-top: -5px;
+    font-weight: bold;
+}
+/*필터끝*/
+
+/*masonry*/
+.item_list{
+   margin: auto;
+   padding: 10px;
+  }
+
+.each_item {
+   width: 300px;
+  height: auto;
+   float: left;
+   margin-bottom:10px;
+}
+
+.each_item img{
+	width: 300px;
+   height: auto;
+   object-fit: cover;
+}
+
+

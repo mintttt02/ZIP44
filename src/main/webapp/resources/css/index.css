@@ -1,0 +1,130 @@
+@charset "UTF-8";
+/* 작성자 : 최나현  */
+
+.index *{
+	box-sizing: border-box;
+	margin: 0px;
+	padding: 0px;
+	text-decoration: none;
+	color : black;
+}
+
+/*인덱스 */
+
+.index{ 
+	margin-top: 62px;
+	min-width:1280px;
+}
+/*인덱스 중간 - 슬라이더*/
+
+.index_mm{
+	width : 500px;
+	margin: auto;
+}
+
+/*인덱스 밑 스토어, 매거진*/
+.index_bb_margin{
+	width: 100%;
+	height: 50px;
+}
+/*매거진, 스토어 네모 */
+.index_m{
+	padding : 0px 15px;
+	width : 430px;
+	border: 1px solid lightgray;
+	border-radius : 8px;
+}
+/*타이틀 로고 */
+.index_title img{
+	vertical-align: bottom;
+    width: 25px;
+    height: auto;
+    display : inline-block;
+	float : left;
+	margin-right: 10px;
+    
+}
+/*타이틀 */
+.index_title{
+	margin-top: 15px;
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: 500;
+    height: 25px;
+}
+/*인덱스 매거진,스토어  사진*/
+.index_p img{
+	max-width : 100%;
+	height: auto;
+}
+/*사진밑 정보 타이틀 */
+.i_title{
+	font-size: 17px;
+    font-weight: 500;
+    padding: 0 10px 0 0;
+    white-space: nowrap; /*공백처리 여러개의공백 하나로처리 */
+    overflow: hidden;
+    text-overflow: ellipsis; /*텍스트 길이가 길면 자동으로 안보이게 함 */
+    color: #595959;
+    margin-top: 15px;
+
+}
+/*매거진 밑 태그*/
+.i_tag{
+	font-size: 0;
+    padding: 0 10px 0 0;
+    overflow: hidden;
+    height: 30px;
+    margin-bottom: 0;
+}
+/*매거진 슬라이더 이미지*/
+.index_p img{
+	width : 380px;
+	height: 380px;
+	object-fit : cover;
+}
+/*태그 안 스판요소 */
+.i_tag span{
+     font-size: 13px;
+    display: inline-block;
+    color: #917751;
+    padding: 4px;
+    margin-right: 5px;
+    cursor: pointer; /*마우스 커서 바꾸는거 */
+}
+
+/*스토어 가격 스판 123*/
+.i_price{
+    padding: 0 10px 6px 0;
+}
+.i_price span:first-child {
+	font-weight: 200;
+    color: #afafaf;
+    text-decoration: line-through;
+}
+.i_price span:nth-child(2) {
+	font-size: 18px;
+    color: #917751;
+    padding-left: 5px;
+}
+.i_price span:nth-child(3){
+	color: #afafaf;
+    padding-left: 5px;
+}
+
+.index_bb{
+	width : 1280px;
+	margin: auto;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
